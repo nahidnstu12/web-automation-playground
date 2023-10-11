@@ -30,3 +30,4 @@ pnpm-error.log*
 
 #Custom
 data
+public/images

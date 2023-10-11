@@ -17,7 +17,7 @@ await page.type(
 await page.waitForSelector(".SearchResults");
 
 try {
-  await page.screenshot({ path: `../../data/capture-1.jpg` /*fullPage: true*/ });
+  await page.screenshot({ path: `../../data/capture-1.jpg` });
 } catch (err) {
   console.log(`Error: ${err.message}`);
 } finally {
