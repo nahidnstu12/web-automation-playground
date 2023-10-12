@@ -32,14 +32,18 @@ app.post("/upload-bmq", async (req, res) => {
   });
   return res.status(200).send({ message: "Successfully uploaded" });
 });
+
+
 app.post("/upload", async (req, res) => {
   const { image } = req.files;
   if (!image) {
     return res.status(400).send("Image not found");
   }
+  console.log("image", {image: image.data})
   await processUploadedImages(image);
   return res.status(200).send({ message: "Successfully uploaded" });
 });
+
 app.listen(4000, () => {
   console.log("Server running on port 4000");
 });

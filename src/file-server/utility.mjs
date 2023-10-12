@@ -11,8 +11,8 @@ const imageURL =`${__dirname}/public/images`;
 export const IMAGE_QUEUE_NAME = "imageJobQueue"
 export const processUploadedImages = (job) =>{
     let counter = 0;
-    const imageFileData = Buffer.from(job.image.data, "base64");
-    const imageName = path.parse(job.image.name).name;
+    const imageFileData = Buffer.from(job?.image?.data || job?.data, "base64");
+    const imageName = path.parse(job?.image?.name || job?.name).name;
 
     const processImage = (size) =>
         sharp(imageFileData)
@@ -21,11 +21,12 @@ export const processUploadedImages = (job) =>{
                 withoutReduction: true
             })
             .webp({ lossless: true })
-            .toFile(`${imageURL}/${imageName}-${size}.webp`);
+            // .toFile(`${imageURL}/${imageName}-${size}.webp`);
+            .toFile(`E:/storage/${imageName}-${size}.webp`);
     // const sizes = [96, 144, 240, 360,480, 720, 1440];
-    const sizes = [ 720, 1440];
+    const sizes = [ 720];
     Promise.all(sizes.map(processImage)).then(()=>console.log("complete", {counter}))
-
+    // testing parpose
     for (let i = 0; i < 10_000_000_000; i++) {
         counter++;
     }
